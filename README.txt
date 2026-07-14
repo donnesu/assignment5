@@ -113,8 +113,8 @@ until kubectl get pods -A | grep kubeplus | grep Running; do echo "Waiting for K
 APP URL:
 ---------
 Include your app endpint app url here:
-appURL1: http://136.111.117.218:32760
-appURL2: http://136.111.117.218:32761
+appURL1: http://136.111.117.218:32760/greetings
+appURL2: http://136.111.117.218:32761/greetings
 
 NOTE:
 -----
