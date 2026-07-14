@@ -1,5 +1,0 @@
-#!/bin/bash
-
-python3 $KUBEPLUS_HOME/plugins/crlicense.py create "$@"
-
-
