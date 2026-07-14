@@ -1,0 +1,51 @@
+#!/bin/bash
+
+if (( $# < 2 )); then
+  echo "kubectl appshow <kind> <instance>"
+  exit 0
+fi
+
+kind=$1
+instance=$2
+namespace=$instance
+
+if ! kubectl get "$kind" "$instance" >/dev/null 2>&1; then
+  echo "Instance $instance does not exist for Kind $kind."
+  exit 0
+fi
+
+echo "Kind: $kind"
+echo "Instance: $instance"
+echo "Namespace: $namespace"
+echo ""
+
+echo "Pods:"
+kubectl get pods -n "$namespace"
+echo ""
+
+echo "Deployments:"
+kubectl get deployments -n "$namespace"
+echo ""
+
+echo "ConfigMaps:"
+kubectl get configmaps -n "$namespace"
+echo ""
+
+echo "ServiceAccounts:"
+kubectl get serviceaccounts -n "$namespace"
+echo ""
+
+echo "NetworkPolicies:"
+kubectl get networkpolicies -n "$namespace"
+echo ""
+
+echo "Services:"
+kubectl get services -n "$namespace"
+echo ""
+
+echo "Roles:"
+kubectl get roles -n "$namespace"
+echo ""
+
+echo "RoleBindings:"
+kubectl get rolebindings -n "$namespace"

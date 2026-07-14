@@ -1,0 +1,11 @@
+apiVersion: platformapi.kubeplus/v1alpha1
+kind: Greeting
+metadata:
+  name: greetings1
+spec:
+  REPLICAS: 1
+  GREETING: "This is greeting1"
+  NODE_PORT: 32760
+  IMAGE: "gcr.io/silicon-parity-457504-r2/dss3273-assignment5:latest"
+  
+
