@@ -14,38 +14,18 @@ if ! kubectl get "$kind" "$instance" >/dev/null 2>&1; then
   exit 0
 fi
 
-echo "Kind: $kind"
-echo "Instance: $instance"
-echo "Namespace: $namespace"
-echo ""
+pod=$(kubectl get pods -n "$namespace" -o jsonpath='{.items[0].metadata.name}')
+deployment=$(kubectl get deployments -n "$namespace" -o jsonpath='{.items[0].metadata.name}')
+configmap=$(kubectl get configmaps -n "$namespace" -o jsonpath='{.items[?(@.metadata.name!="kube-root-ca.crt")].metadata.name}')
+serviceaccount=$(kubectl get serviceaccounts -n "$namespace" -o jsonpath='{.items[?(@.metadata.name!="default")].metadata.name}')
+networkpolicy=$(kubectl get networkpolicies -n "$namespace" -o jsonpath='{.items[0].metadata.name}')
 
-echo "Pods:"
-kubectl get pods -n "$namespace"
-echo ""
-
-echo "Deployments:"
-kubectl get deployments -n "$namespace"
-echo ""
-
-echo "ConfigMaps:"
-kubectl get configmaps -n "$namespace"
-echo ""
-
-echo "ServiceAccounts:"
-kubectl get serviceaccounts -n "$namespace"
-echo ""
-
-echo "NetworkPolicies:"
-kubectl get networkpolicies -n "$namespace"
-echo ""
-
-echo "Services:"
-kubectl get services -n "$namespace"
-echo ""
-
-echo "Roles:"
-kubectl get roles -n "$namespace"
-echo ""
-
-echo "RoleBindings:"
-kubectl get rolebindings -n "$namespace"
+cat <<EOF
+{
+  "pod": "$pod",
+  "deployment": "$deployment",
+  "configmap": "$configmap",
+  "serviceaccount": "$serviceaccount",
+  "networkpolicy": "$networkpolicy"
+}
+EOF
