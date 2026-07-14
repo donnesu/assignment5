@@ -1,4 +1,5 @@
+AI tool used: OpenCode / ChatGPT, model gpt-5.5
+
 Help resolve Helm install error: cannot reuse a name that is still in use.
 Help fix kubectl man KUBEPLUS_HOME plugin path issue.
 Help diagnose ImagePullBackOff after building and pushing the image.
-
